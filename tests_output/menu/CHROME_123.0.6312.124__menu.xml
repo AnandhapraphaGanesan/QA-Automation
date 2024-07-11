@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="2"
+            failures="0"
+            tests="3">
+
+  <testsuite name="menu.menu"
+    errors="2" failures="0" hostname="" id="" package="menu" skipped="0"
+    tests="3" time="10.38" timestamp="">
+  
+    <testcase name="Scenario: To verify user is able to navigate menu landing screen and verify its category list" classname="menu.menu" time="0.001000" assertions="0">
+    </testcase>
+  
+    <testcase name="Given user clicks on the Continue As Guest button" classname="menu.menu" time="5.131" assertions="0">
+    <error message="An error occurred while running .click() command on &lt;//android.widget.TextView[@content-desc=&#34;Continue As Guest&#34;]&gt;: Timed out while waiting for element &#34;//android.widget.TextView[@content-desc=&#34;Continue As Guest&#34;]&#34; with &#34;xpath&#34; to be present for 5000 milliseconds." type="error"><![CDATA[
+    Error
+    at Object.&lt;anonymous&gt; (/Users/jeyaprakash.kanagaraj/Downloads/Automation/tests/step_definitions/mobile/menu/menu.js:11:14)
+    ]]></error>
+    
+    </testcase>
+  
+    <testcase name="When user clicks on the Skip show me chicken button" classname="menu.menu" time="0.05900" assertions="0">
+    <error type="error"><![CDATA[
+    Error
+    at Object.&lt;anonymous&gt; (/Users/jeyaprakash.kanagaraj/Downloads/Automation/tests/step_definitions/mobile/menu/menu.js:15:14)
+    at Context.call (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/context.js:515:35)
+    at TestCase.run (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/testcase.js:58:31)
+    at Runnable.__runFn (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/index.js:839:80)
+    at Runnable.run (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/runnable.js:126:21)
+    at TestSuite.executeRunnable (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/index.js:1000:49)
+    at TestSuite.handleRunnable (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/index.js:1015:33)
+    at /Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/testsuite/index.js:839:21
+    at async DefaultRunner.runTestSuite (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/runner/test-runners/default.js:83:7)
+    at async DefaultRunner.promiseFn (/Users/jeyaprakash.kanagaraj/Downloads/Automation/node_modules/nightwatch/lib/runner/test-runners/default.js:101:7)
+    ]]></error>
+    
+    </testcase>
+  
+
+  
+    <system-err>
+       NoSuchElementError
+   An element could not be located on the page using the given search parameters.
+
+    Try fixing by :
+    1. Please inspect the html before the step
+    2. Verify if an element with the mentioned selector is present in the DOM tree
+
+    Error location:
+    /Users/jeyaprakash.kanagaraj/Downloads/Automation/tests/step_definitions/mobile/menu/menu.js:11
+    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     9 |     it(&#39;Given user clicks on the Continue As Guest button&#39;, async function (app) {
+     10 |         app
+     11 |             .click(login.elements.guest) 
+     12 |     });
+     13 |     it(&#39;When user clicks on the Skip show me chicken button&#39;, async function (app) {
+    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+ Error
+   Error while running &#34;click&#34; command: Invalid selector value specified &#34;undefined&#34;
+
+    Error location:
+    /Users/jeyaprakash.kanagaraj/Downloads/Automation/tests/step_definitions/mobile/menu/menu.js:15
+    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     13 |     it(&#39;When user clicks on the Skip show me chicken button&#39;, async function (app) {
+     14 |         app
+     15 |             .click(login.elements.skip) 
+     16 |     });
+     17 |     it(&#39;And user verifies menu header is displayed in the screen&#39;, async function (app) {
+    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
