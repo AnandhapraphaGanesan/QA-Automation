@@ -1,34 +1,48 @@
 const xlsx = require('xlsx');
 
-// Function to read Excel data
+// Function to read Excel data - input sheet
 function readExcel(filePath, sheetName) {
     const workbook = xlsx.readFile(filePath);
     const worksheet = workbook.Sheets[sheetName];
     return xlsx.utils.sheet_to_json(worksheet);
 }
 
-// Function to write results to Excel
+// Function to write results to Excel - output sheet
 function writeResultsToExcel(filePath, sheetName, results) {
     const workbook = xlsx.readFile(filePath);
     const existingSheet = workbook.Sheets[sheetName];
 
-    // Read existing data if the sheet exists
+    // Read existing data if the sheet exists - output side
     let existingData = [];
     if (existingSheet) {
         existingData = xlsx.utils.sheet_to_json(existingSheet, { header: 1 });
     }
 
     // Find the first empty row
-    const firstEmptyRow = existingData.findIndex(row => row.length === 0);
-    const startRow = firstEmptyRow === -1 ? existingData.length : firstEmptyRow;
+    const firstEmptyRow = existingData.findIndex(row => row.length === 0); //Finding the First Empty Row
+    const startRow = firstEmptyRow === -1 ? existingData.length : firstEmptyRow; //Determining the Start Row for New Data
+
 
     // Append new results to existing data
     for (let i = 0; i < results.length; i++) {
         existingData[startRow + i] = Object.values(results[i]);
     }
-   }
 
-// Utility function to format date to string (YYYY-MM-DD)
+    // Remove the existing sheet if it exists - input to result sheet
+    if (workbook.SheetNames.includes(sheetName)) {
+        delete workbook.Sheets[sheetName];
+        const sheetIndex = workbook.SheetNames.indexOf(sheetName);
+        if (sheetIndex > -1) {
+            workbook.SheetNames.splice(sheetIndex, 1);
+        }
+    }
+
+    const newSheet = xlsx.utils.aoa_to_sheet(existingData); //Creating a New Sheet with Updated Data
+    xlsx.utils.book_append_sheet(workbook, newSheet, sheetName);//Appending the New Sheet to the Workbook
+    xlsx.writeFile(workbook, filePath);
+}
+
+// Utility function to format date to string (YYYY-MM-DD) - input sheet
 function formatDateToString(excelDate) {
     const date = new Date((excelDate - (25567 + 2)) * 86400 * 1000); // Adjust Excel date to JavaScript date
     const year = date.getFullYear();
@@ -37,7 +51,7 @@ function formatDateToString(excelDate) {
     return `${year}-${month}-${day}`;
 }
 
-// Utility function to get current date and time as a formatted string
+// Utility function to get current date and time as a formatted string - output sheet
 function getCurrentDateTime() {
     const now = new Date();
     const year = now.getFullYear();
@@ -412,7 +426,7 @@ describe('api Auth Token1', function () {
                         console.log("PMS Confirmation Number:", pmsConfirmationNumber);
                     })
                     .catch(function (error) {
-                        console.error('Error in Get api test 3:', error);
+                        console.error('Error in Get api test 3:', error); 
                     });
 
                 // Store result

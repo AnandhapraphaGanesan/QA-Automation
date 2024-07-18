@@ -1,33 +1,34 @@
 const xlsx = require('xlsx');
 
-// Function to read Excel data
+// Function to read Excel data - input sheet
 function readExcel(filePath, sheetName) {
     const workbook = xlsx.readFile(filePath);
     const worksheet = workbook.Sheets[sheetName];
     return xlsx.utils.sheet_to_json(worksheet);
 }
 
-// Function to write results to Excel
+// Function to write results to Excel - output sheet
 function writeResultsToExcel(filePath, sheetName, results) {
     const workbook = xlsx.readFile(filePath);
     const existingSheet = workbook.Sheets[sheetName];
 
-    // Read existing data if the sheet exists
+    // Read existing data if the sheet exists - output side
     let existingData = [];
     if (existingSheet) {
         existingData = xlsx.utils.sheet_to_json(existingSheet, { header: 1 });
     }
 
     // Find the first empty row
-    const firstEmptyRow = existingData.findIndex(row => row.length === 0);
-    const startRow = firstEmptyRow === -1 ? existingData.length : firstEmptyRow;
+    const firstEmptyRow = existingData.findIndex(row => row.length === 0); //Finding the First Empty Row
+    const startRow = firstEmptyRow === -1 ? existingData.length : firstEmptyRow; //Determining the Start Row for New Data
+
 
     // Append new results to existing data
     for (let i = 0; i < results.length; i++) {
         existingData[startRow + i] = Object.values(results[i]);
     }
 
-    // Remove the existing sheet if it exists
+    // Remove the existing sheet if it exists - input to result sheet
     if (workbook.SheetNames.includes(sheetName)) {
         delete workbook.Sheets[sheetName];
         const sheetIndex = workbook.SheetNames.indexOf(sheetName);
@@ -36,12 +37,12 @@ function writeResultsToExcel(filePath, sheetName, results) {
         }
     }
 
-    const newSheet = xlsx.utils.aoa_to_sheet(existingData);
-    xlsx.utils.book_append_sheet(workbook, newSheet, sheetName);
+    const newSheet = xlsx.utils.aoa_to_sheet(existingData); //Creating a New Sheet with Updated Data
+    xlsx.utils.book_append_sheet(workbook, newSheet, sheetName);//Appending the New Sheet to the Workbook
     xlsx.writeFile(workbook, filePath);
 }
 
-// Utility function to format date to string (YYYY-MM-DD)
+// Utility function to format date to string (YYYY-MM-DD) - input sheet
 function formatDateToString(excelDate) {
     const date = new Date((excelDate - (25567 + 2)) * 86400 * 1000); // Adjust Excel date to JavaScript date
     const year = date.getFullYear();
@@ -50,7 +51,7 @@ function formatDateToString(excelDate) {
     return `${year}-${month}-${day}`;
 }
 
-// Utility function to get current date and time as a formatted string
+// Utility function to get current date and time as a formatted string - output sheet
 function getCurrentDateTime() {
     const now = new Date();
     const year = now.getFullYear();
@@ -83,7 +84,7 @@ const testResults = []; // Array to store test results
 
 describe('api Auth Token1', function () {
     data.forEach(row => {
-        it('GET api test', async function ({ supertest }) {
+        it('GET AuthToken1', async function ({ supertest }) {
             await supertest
                 .request(row.request)
                 .post(row.Authendpath)
@@ -99,18 +100,174 @@ describe('api Auth Token1', function () {
                 .expect('Content-Type', /json/)
                 .then(function (response) {
                     authToken1 = response.body.access_token;
+                    console.log('Access Token1:', authToken1);
                 })
                 .catch(function (error) {
                     console.error('Error in GET api test:', error);
                 });
         });
 
-        it('post api test after login for reservation', async function ({ supertest }) {
+        //check availability
+        it('Get check availability', async function ({ supertest }) {
             const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
             const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
             formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
             formattedDepatureDate = formatDateToString(row.depatureDate); // Format depatureDate to string
 
+            await supertest
+                .request(row.request)
+                .get(row.Getendpath2)
+                .query({
+                    "roomStayStartDate": formattedStartDate,
+                    "roomStayEndDate": formattedEndDate,
+                    "hotelIds": row.hotelId,
+                    "children": row.children,
+                    "roomTypeInfo": true,
+                    "adults": row.adults,
+                    "ratePlanInfo": true,
+                    "limit": row.limit,
+                    "redeemAwards": false,
+                    "roomStayQuantity": row.roomStayQuantity,
+                    "initialRatePlanSet": true,
+                    "resGuaranteeInfo": false
+                })
+                .set('Content-Type', row['Content-Type1'])
+                .set('x-hotelid', row.hotelId)
+                .set('x-app-key', row['x-app-key'])
+                .set('bypass-routing', row['bypass-routing1'])
+                .set('Authorization', 'Bearer ' + authToken1)
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(function (response) {
+                    console.log(response)
+                });
+        })
+
+        //check validation
+        it('put check validation', async function ({ supertest }) {
+            const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
+            const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
+            formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
+            formattedDepatureDate = formatDateToString(row.depatureDate); // Format depatureDate to string
+            await supertest
+                .request(row.request)
+                .put(row.Putendpath)
+                .set('Content-Type', row['Content-Type1'])
+                .set('x-hotelid', row.hotelId)
+                .set('x-app-key', row['x-app-key'])
+                .set('bypass-routing', row['bypass-routing'])
+                .set('Authorization', 'Bearer ' + authToken1)
+                .send(
+                    {
+                        "instructions": {
+                            "instruction": [
+                                "Packages",
+                                "InventoryItems",
+                                "ReservationGuarantee",
+                                "StayHeader",
+                                "RefreshRates"
+                            ]
+                        },
+                        "reservation": {
+                            "roomStay": {
+                                "roomRates": {
+                                    "rates": {
+                                        "rate": {
+                                            "base": {
+                                                "amountBeforeTax": 179,
+                                                "baseAmount": 179,
+                                                "currencyCode": "USD"
+                                            },
+                                            "discount": "",
+                                            "eventStartDate": formattedStartDate,
+                                            "startDate": formattedStartDate,
+                                            "start": formattedStartDate,
+                                            "end": formattedEndDate,
+                                            "endDate": formattedEndDate,
+                                            "eventEndDate": formattedEndDate
+                                        }
+                                    },
+                                    "stayProfiles": [
+                                        {
+                                            "reservationProfileType": "Company"
+                                        },
+                                        {
+                                            "reservationProfileType": "Group"
+                                        },
+                                        {
+                                            "reservationProfileType": "TravelAgent"
+                                        },
+                                        {
+                                            "reservationProfileType": "ReservationContact"
+                                        },
+                                        {
+                                            "reservationProfileType": "BillingContact"
+                                        },
+                                        {
+                                            "reservationProfileType": "Source"
+                                        }
+                                    ],
+                                    "guestCounts": {
+                                        "adults": row.adults,
+                                        "children": row.children
+                                    },
+                                    "taxFreeGuestCounts": {
+                                        "adults": 0,
+                                        "children": 0
+                                    },
+                                    "roomType": row.roomType,
+                                    "ratePlanCode": row.ratePlanCode,
+                                    "marketCode": row.marketCode,
+                                    "sourceCode": row.sourceCode,
+                                    "numberOfUnits": row.numberOfUnits,
+                                    "pseudoRoom": false,
+                                    "roomTypeCharged": row.roomTypeCharged,
+                                    "eventStartDate": formattedStartDate,
+                                    "startDate": formattedStartDate,
+                                    "start": formattedStartDate,
+                                    "end": formattedEndDate,
+                                    "endDate": formattedEndDate,
+                                    "eventEndDate": formattedEndDate
+                                },
+                                "guestCounts": {
+                                    "adults": row.adults,
+                                    "children": row.children
+                                },
+                                "expectedTimes": {
+                                    "reservationExpectedArrivalTime": formattedArrivalDate,
+                                    "resExpectedArrivalTime": formattedArrivalDate,
+                                    "reservationExpectedDepartureTime": formattedDepatureDate,
+                                    "resExpectedDepartureTime": formattedDepatureDate
+                                },
+                                "guarantee": {
+                                    "guaranteeCode": row.guaranteeCode
+                                },
+                                "arrivalDate": formattedArrivalDate,
+                                "departureDate": formattedDepatureDate
+                            },
+                            "hotelId": row.hotelId,
+                            "preRegistered": false,
+                            "allowMobileCheckout": false,
+                            "overrideOutOfServiceCheck": true
+                        },
+                        "timeSpan": {
+                            "startDate": formattedStartDate,
+                            "endDate": formattedEndDate
+                        }
+                    }
+                )
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(function (response) {
+                    console.log(response)
+                });
+        });
+
+        it('post create reservation', async function ({ supertest }) {
+            const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
+            const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
+            formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
+            formattedDepatureDate = formatDateToString(row.depatureDate); // Format depatureDate to string
             await supertest
                 .request(row.request)
                 .post(row.Postendpath)
@@ -334,7 +491,7 @@ describe('api Auth Token1', function () {
     });
 
     data.forEach(row => {
-        it('Get api test after login', async function ({ supertest }) {
+        it('Get reservation OHIP', async function ({ supertest }) {
             await supertest
                 .request(row.request)
                 .get(row.Getendpath + reservationId)
@@ -368,7 +525,7 @@ describe('api Auth Token1', function () {
 
     describe('api Authu Token2', function () {
         data.forEach(row => {
-            it('GET api test 2', async function ({ supertest }) {
+            it('GET AuthToken2', async function ({ supertest }) {
                 await supertest
                     .request(row.request1)
                     .post(row.Authendpath1)
@@ -390,7 +547,7 @@ describe('api Auth Token1', function () {
                     });
             });
 
-            it('Get api test 3', async function ({ supertest }) {
+            it('Get reservation GRS', async function ({ supertest }) {
                 await supertest
                     .request(row.request1)
                     .get(row.Getendpath1 + externalReferenceId)
@@ -448,4 +605,4 @@ describe('api Auth Token1', function () {
             writeResultsToExcel(filePath, resultsSheetName, testResults);
         });
     });
-});
+})

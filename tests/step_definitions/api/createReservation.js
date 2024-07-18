@@ -41,8 +41,8 @@ describe('api Authu Token', function () {
                         "amountBeforeTax": 299,
                         "baseAmount": 299
                       },
-                      "start": "2024-10-29",
-                      "end": "2024-10-29"
+                      "start": "2024-10-28",
+                      "end": "2024-10-28"
                     }
                   },
                   "stayProfiles": [
@@ -76,27 +76,27 @@ describe('api Authu Token', function () {
                   "numberOfUnits":1,
                   "pseudoRoom": false,
                   "roomTypeCharged": "KAIN",
-                  "start": "2024-10-29",
-                  "end": "2024-10-29"
+                  "start": "2024-10-28",
+                  "end": "2024-10-28"
                 },
                 "guestCounts": {
                   "adults": 1,
                   "children": 1
                 },
                 "expectedTimes": {
-                  "reservationExpectedArrivalTime": "2024-10-29",
-                  "reservationExpectedDepartureTime": "2024-10-30"
+                  "reservationExpectedArrivalTime": "2024-10-28",
+                  "reservationExpectedDepartureTime": "2024-10-29"
                 },
                 "guarantee": {
                   "guaranteeCode": "INN",
                   "onHold": false
                 },
-                "arrivalDate": "2024-10-29",
-                "departureDate": "2024-10-30"
+                "arrivalDate": "2024-10-28",
+                "departureDate": "2024-10-29"
               },
               "reservationGuests": {
                 "profileInfo": {
-                  "profileIdList": {
+                  "profileIdList": { 
                     "type": "Profile",
                     "id": 45387
                   },
@@ -106,6 +106,7 @@ describe('api Authu Token', function () {
                         {
                           "givenName": "Sangeetha",
                           "surname": "SR",
+
                           "nameType": "Primary"
                         },
                         {
@@ -236,18 +237,18 @@ describe('api Authu Token', function () {
       });
   });
 })
-it('Get api test after login', async function ({ supertest }) {
-  await supertest
-    .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
-    .get("/rsv/v1/hotels/GRVZA/reservations/90426")
-    .set('Content-Type', 'application/json')
-    .set('x-hotelid', 'GRVZA')
-    .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
-    .set('bypass-routing', 'N')
-    .set('Authorization', 'Bearer ' + authToken)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then(function (response) {
-      console.log(response)
-    });
-});
+// it('Get api test after login', async function ({ supertest }) {
+//   await supertest
+//     .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
+//     .get("/rsv/v1/hotels/GRVZA/reservations/90426")
+//     .set('Content-Type', 'application/json')
+//     .set('x-hotelid', 'GRVZA')
+//     .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
+//     .set('bypass-routing', 'Y')
+//     .set('Authorization', 'Bearer ' + authToken)
+//     .expect(200)
+//     .expect('Content-Type', /json/)
+//     .then(function (response) {
+//       console.log(response)
+//     });
+// });

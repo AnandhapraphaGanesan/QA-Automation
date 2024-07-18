@@ -39,6 +39,7 @@ describe('api Authu Token', function () {
       .set('X-IHG-API-KEY', 'Af9n4H1gUGdEAOGK6PcPk3FWX2PhyWFo')
       .set('bypass-routing', 'N')
       .set('Authorization', 'Basic QWY5bjRIMWdVR2RFQU9HSzZQY1BrM0ZXWDJQaHlXRm86ODRjd2VVMEtBM2IycFl4WA==')
+      .set('Content-Length', '<calculated when request is sent>')
       .expect(200)
       .expect('Content-Type', /json/)
       .then(function (response) {

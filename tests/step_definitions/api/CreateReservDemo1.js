@@ -69,8 +69,13 @@ describe('api Auth Token1', function () {
         .expect('Content-Type', /json/)
         .then(function (response) {
           authToken1 = response.body.access_token;
-        });
+          console.log('Access Token1:', authToken1);
+        });  
     });
+
+    // testResults.push({ 
+    //   AccessToken1:authToken1
+    //  });
 
     it('post api reservation', async function ({ supertest }) {
       console.log(`Row ${rowIndex}: URL = ${row[0]}, Endpoint = ${row[2]}`);
@@ -338,7 +343,7 @@ describe('api Auth Token1', function () {
     // ArrivalDate: formattedDepatureDate, // Include formatted startDate
     // DepartureDate: formattedArrivalDate, // Include formatted endDate
     ConfirmationID: confirmationId,
-    ExternalReferenceId: externalReferenceId
+    ExternalReferenceId: externalReferenceId,
   });
           
         });
@@ -386,7 +391,7 @@ describe('api Authu Token2', function () {
         .expect(200)
         .expect('Content-Type', /json/)
         .then(function (response) {
-          console.log(response.text);
+          // console.log(response.text);
           console.log("Reservation created successfully in GRS");
         });
     });
