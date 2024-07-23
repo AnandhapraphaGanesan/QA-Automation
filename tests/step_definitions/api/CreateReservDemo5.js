@@ -9,27 +9,26 @@ function readExcel(filePath, sheetName) {
 
 // Function to write results to Excel - output sheet
 function writeResultsToExcel(filePath, sheetName, results) {
-    const workbook = xlsx.readFile(filePath);
-    const existingSheet = workbook.Sheets[sheetName];
+    const workbook = xlsx.readFile(filePath); //Reading the Excel File
+    const existingSheet = workbook.Sheets[sheetName]; // Accessing the Existing Sheet
 
     // Read existing data if the sheet exists - output side
-    let existingData = [];
+    let existingData = []; // Initializing Existing Data Array
     if (existingSheet) {
-        existingData = xlsx.utils.sheet_to_json(existingSheet, { header: 1 });
+        existingData = xlsx.utils.sheet_to_json(existingSheet, { header: 1 }); // Converting Existing Sheet Data to JSON
     }
 
     // Find the first empty row
     const firstEmptyRow = existingData.findIndex(row => row.length === 0); //Finding the First Empty Row
     const startRow = firstEmptyRow === -1 ? existingData.length : firstEmptyRow; //Determining the Start Row for New Data
 
-
     // Append new results to existing data
     for (let i = 0; i < results.length; i++) {
         existingData[startRow + i] = Object.values(results[i]);
     }
 
-    // Remove the existing sheet if it exists - input to result sheet
-    if (workbook.SheetNames.includes(sheetName)) {
+     // Remove the existing sheet if it exists - input to result sheet
+     if (workbook.SheetNames.includes(sheetName)) {
         delete workbook.Sheets[sheetName];
         const sheetIndex = workbook.SheetNames.indexOf(sheetName);
         if (sheetIndex > -1) {
@@ -48,7 +47,7 @@ function formatDateToString(excelDate) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`; //Returning the Formatted Date String
 }
 
 // Utility function to get current date and time as a formatted string - output sheet
@@ -100,7 +99,6 @@ describe('api Auth Token1', function () {
                 .expect('Content-Type', /json/)
                 .then(function (response) {
                     authToken1 = response.body.access_token;
-                    console.log('Access Token1:', authToken1);
                 })
                 .catch(function (error) {
                     console.error('Error in GET api test:', error);

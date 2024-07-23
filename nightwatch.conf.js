@@ -31,7 +31,7 @@ module.exports = {
   
   
   // See https://nightwatchjs.org/guide/concepts/test-globals.html
-  globals_path: '',
+  globals_path: 'C:/Users/User/Documents/QA-Automation/globals.js',
   
   webdriver: {},
 

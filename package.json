@@ -44,7 +44,8 @@
     "appium-uiautomator2-driver": "^3.1.0",
     "appium-xcuitest-driver": "^7.11.3",
     "chromedriver": "^125.0.2",
-    "nightwatch": "^3.6.0"
+    "nightwatch": "^3.6.0",
+    "nightwatch-allure": "^1.2.0"
   },
   "dependencies": {
     "@cucumber/pretty-formatter": "^1.0.1",
