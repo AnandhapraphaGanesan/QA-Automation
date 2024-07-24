@@ -28,7 +28,7 @@ describe('api Authu Token', function () {
   it('Get api test ', async function ({ supertest }) {    
     await supertest
       .request("https://int-api.ihg.com")
-      .get("/reservations/v3/hotels/81262375")
+      .get("/reservations/v3/hotels/66481291")
       .query({
         lastName: 'SR'
       })
