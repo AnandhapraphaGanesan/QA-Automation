@@ -856,7 +856,7 @@ describe('api Auth Token1', function () {
                 // Store result
                 testResults.push({
                     Status: 'Reservation created successfully ',
-                    ReservationID: reservationId,
+                    ReservationID: reservationId,   
                     ConfirmationID: confirmationId,
                     ExternalReferenceId: externalReferenceId,
                     IHGConfirmationNumber: ihgConfirmationNumber,
@@ -869,9 +869,73 @@ describe('api Auth Token1', function () {
             });
         });
 
+        it('post api test after login', async function ({ supertest }) {
+            await supertest
+              .request(row.request)
+              .post(row.Postendpath1)
+              .set('Content-Type', row['Content-Type1'] )
+              .set('x-hotelid', row.hotelId)
+              .set('x-app-key', row['x-app-key'] )
+              .set('bypass-routing',row['bypass-routing'] )
+              .set('Authorization', 'Bearer ' + authToken1)
+              .send(
+                {
+                  "reason": {
+                    "description": row.reason,
+                    "code": row.reason
+                  },
+                  "reservations": [
+                    {
+                      "cxlInstr": {
+                        "deleteResTraces": false
+                      },
+                      "reservationIdList": [
+                        {
+                          "type": "Reservation",
+                          "id": reservationId
+                        }
+                      ],
+                      "externalCancellationId": "1234",
+                      "hotelId": row.hotelId,
+                      "preRegistered": false,
+                      "openFolio": false,
+                      "allowMobileCheckout": false
+                    },
+                    {
+                      "cxlInstr": {
+                        "deleteResTraces": false
+                      },
+                      "reservationIdList": [
+                        {
+                          "type": "Reservation",
+                          "id": reservationId
+                        }
+                      ],
+                      "externalCancellationId": "1235",
+                      "hotelId": row.hotelId,
+                      "preRegistered": false,
+                      "openFolio": false,
+                      "allowMobileCheckout": false
+                    }
+                  ],
+                  "verificationOnly": false
+                }
+              )
+              .expect(201)
+              .expect('Content-Type', /json/)
+              .then(function (response) {
+                console.log(response)
+                console.log("Status: Reservation cancelled Successfully");
+              });
+          });
+        });
+
+
+    
         after(function () {
             writeResultsToExcel(filePath, resultsSheetName, testResults);
         });
     });
 });
-})
+
+
