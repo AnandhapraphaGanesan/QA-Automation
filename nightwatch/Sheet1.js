@@ -63,9 +63,9 @@ function getCurrentDateTime() {
 }
 
 // Correct file path and sheet name
-const filePath = 'C:/Users/User/Desktop/create1.xlsx';
-const sheetName = 'Sheet3'; // Ensure this matches your sheet name
-const resultsSheetName = 'result2';
+const filePath = 'C:/Users/User/Desktop/Reservation.xlsx';
+const sheetName = 'CreateReservation'; // Ensure this matches your sheet name
+const resultsSheetName = 'Result';
 
 // Read the data from the Excel file
 const data = readExcel(filePath, sheetName);
@@ -81,7 +81,7 @@ let formattedArrivalDate;
 let formattedDepatureDate;
 const testResults = []; // Array to store test results
 
-describe('api Auth Token1', function () {
+describe('Api Auth Token1', function () {
     data.forEach(row => {
         it('GET AuthToken1', async function ({ supertest }) {
             await supertest
@@ -106,7 +106,7 @@ describe('api Auth Token1', function () {
         });
 
         //check availability
-        it('Get check availability', async function ({ supertest }) {
+        it('GET Check Availability', async function ({ supertest }) {
             const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
             const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
             formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
@@ -142,7 +142,7 @@ describe('api Auth Token1', function () {
         })
 
         //check validation
-        it('put check validation', async function ({ supertest }) {
+        it('PUT Check Validation', async function ({ supertest }) {
             const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
             const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
             formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
@@ -261,7 +261,7 @@ describe('api Auth Token1', function () {
                 });
         });
 
-        it('post create reservation', async function ({ supertest }) {
+        it('Post Create Reservation', async function ({ supertest }) {
             const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
             const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
             formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
@@ -489,7 +489,7 @@ describe('api Auth Token1', function () {
     });
 
     data.forEach(row => {
-        it('Get reservation OHIP', async function ({ supertest }) {
+        it('GET Reservation OHIP', async function ({ supertest }) {
             await supertest
                 .request(row.request)
                 .get(row.Getendpath + reservationId)
@@ -522,7 +522,7 @@ describe('api Auth Token1', function () {
     });
 
     data.forEach(row => {
-    it("Put Update reservation", async function ({ supertest }) {
+    it("PUT Update Reservation", async function ({ supertest }) {
         const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
         const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
         formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
@@ -759,7 +759,7 @@ describe('api Auth Token1', function () {
       });
 
       data.forEach(row => {
-        it('Get reservation OHIP1', async function ({ supertest }) {
+        it('GET Reservation OHIP1', async function ({ supertest }) {
             await supertest
                 .request(row.request)
                 .get(row.Getendpath + reservationId)
@@ -791,7 +791,7 @@ describe('api Auth Token1', function () {
         });
     });
       
-    describe('api Authu Token2', function () {
+    describe('Api Authu Token2', function () {
         data.forEach(row => {
             it('GET AuthToken2', async function ({ supertest }) {
                 await supertest
@@ -815,7 +815,7 @@ describe('api Auth Token1', function () {
                     });
             });
 
-            it('Get reservation GRS', async function ({ supertest }) {
+            it('GET Reservation GRS', async function ({ supertest }) {
                 await supertest
                     .request(row.request1)
                     .get(row.Getendpath1 + externalReferenceId)
@@ -852,24 +852,25 @@ describe('api Auth Token1', function () {
                     .catch(function (error) {
                         console.error('Error in Get api test 3:', error);
                     });
+                    // Store result
+         testResults.push({
+          Status: 'Reservation created successfully ',
+          ReservationID: reservationId,   
+          ConfirmationID: confirmationId,
+          ExternalReferenceId: externalReferenceId,
+          IHGConfirmationNumber: ihgConfirmationNumber,
+          ExternalConfirmationNumber: externalConfirmationNumber,
+          PMSConfirmationNumber: pmsConfirmationNumber,
+          ArrivalDate: formattedArrivalDate,
+          DepartureDate: formattedDepatureDate,
+          DateTime: getCurrentDateTime(),
+        
+      });
 
-                // Store result
-                testResults.push({
-                    Status: 'Reservation created successfully ',
-                    ReservationID: reservationId,   
-                    ConfirmationID: confirmationId,
-                    ExternalReferenceId: externalReferenceId,
-                    IHGConfirmationNumber: ihgConfirmationNumber,
-                    ExternalConfirmationNumber: externalConfirmationNumber,
-                    PMSConfirmationNumber: pmsConfirmationNumber,
-                    ArrivalDate: formattedArrivalDate,
-                    DepartureDate: formattedDepatureDate,
-                    DateTime: getCurrentDateTime()
-                });
             });
         });
 
-        it('post api test after login', async function ({ supertest }) {
+        it('Post Cancel Reservation', async function ({ supertest }) {
             await supertest
               .request(row.request)
               .post(row.Postendpath1)
@@ -929,9 +930,7 @@ describe('api Auth Token1', function () {
               });
           });
         });
-
-
-    
+         
         after(function () {
             writeResultsToExcel(filePath, resultsSheetName, testResults);
         });

@@ -63,7 +63,7 @@ function getCurrentDateTime() {
 }
 
 // Correct file path and sheet name
-const filePath = 'C:/Users/User/Desktop/CreateReservation.xlsx';
+const filePath = 'C:/Users/User/Desktop/Reservation.xlsx';
 const sheetName = 'CreateReservation'; // Ensure this matches your sheet name
 const resultsSheetName = 'Result';
 
@@ -83,7 +83,14 @@ const testResults = []; // Array to store test results
 
 describe('Api Auth Token1', function () {
     data.forEach(row => {
-        it('GET AuthToken1', async function ({ supertest }) {
+        it('GET AuthToken1', async function ({ supertest }) { 
+            console.log('Request:', row.request); // Debugging line
+            console.log('AuthendPath:', row.Authendpath); // Debugging line
+
+            if (!row.request || !row.Authendpath) {
+                throw new Error('Missing request or AuthendPath in row');
+            }
+
             await supertest
                 .request(row.request)
                 .post(row.Authendpath)
@@ -522,7 +529,7 @@ describe('Api Auth Token1', function () {
     });
 
     describe('Api Authu Token2', function () {
-        data.forEach(row => {
+        data.forEach(row => { 
             it('GET AuthToken2', async function ({ supertest }) {
                 await supertest
                     .request(row.request1)

@@ -39,7 +39,7 @@ module.exports = {
     enabled: true
   },
 
-  test_settings: {
+    test_settings: {
     default: {
       disable_error_log: false,
       launch_url: 'https://www.oracle.com/',
