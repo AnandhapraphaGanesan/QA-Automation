@@ -1,4 +1,5 @@
 const xlsx = require('xlsx');
+const fs = require('fs');
 
 // Function to read Excel data
 function readExcel(filePath, sheetName) {
@@ -41,6 +42,36 @@ function writeResultsToExcel(filePath, sheetName, results) {
     xlsx.writeFile(workbook, filePath);
 }
 
+// // Function to write results to Excel
+// function writeResultsToExcel(filePath, sheetName, results) {
+//     let workbook;
+//     let worksheet;
+
+//     // Check if the file exists
+//     if (fs.existsSync(filePath)) {
+//         workbook = xlsx.readFile(filePath);
+//         worksheet = workbook.Sheets[sheetName] || xlsx.utils.aoa_to_sheet([]);
+//     } else {
+//         workbook = xlsx.utils.book_new();
+//         worksheet = xlsx.utils.aoa_to_sheet([]);
+//         xlsx.utils.book_append_sheet(workbook, worksheet, sheetName);
+//     }
+
+//     // Convert worksheet to JSON format and append new results
+//     let existingData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+//     results.forEach((result) => {
+//         existingData.push(Object.values(result));
+//     });
+
+//     // Update the worksheet with the new data
+//     worksheet = xlsx.utils.aoa_to_sheet(existingData);
+//     workbook.Sheets[sheetName] = worksheet;
+
+//     // Write the updated workbook back to the file
+//     xlsx.writeFile(workbook, filePath);
+// }
+
+
 // Utility function to format date to string (YYYY-MM-DD)
 function formatDateToString(excelDate) {
     const date = new Date((excelDate - (25567 + 2)) * 86400 * 1000); // Adjust Excel date to JavaScript date
@@ -63,9 +94,9 @@ function getCurrentDateTime() {
 }
 
 // Correct file path and sheet name
-const filePath = 'C:/Users/User/Desktop/create1.xlsx';
-const sheetName = 'Sheet3'; // Ensure this matches your sheet name
-const resultsSheetName = 'result2';
+const filePath = 'C:/Users/User/Desktop/Demo1.xlsx';
+const sheetName = 'CreateReservation'; // Ensure this matches your sheet name
+const resultsSheetName = 'Result';
 
 // Read the data from the Excel file
 const data = readExcel(filePath, sheetName);
@@ -303,7 +334,7 @@ describe('api Auth Token1', function () {
                                         "printAutoAdjust": false
                                     },
                                     "reverseCheckInAllowed": false,
-                                    "reverseAdvanceCheckInAllowed": false
+                                    "reverseAdvanceCheckInAllowed": falses
                                 },
                                 "hotelId": row.hotelId,
                                 "reservationStatus": "Reserved",
@@ -440,7 +471,7 @@ describe('api Auth Token1', function () {
                     DateTime: getCurrentDateTime()
                 });
             });
-        });
+        }); 
         after(function () {
             // Write results to Excel after all tests are done
             writeResultsToExcel(filePath, resultsSheetName, testResults);

@@ -23,8 +23,6 @@ describe('api Authu Token1', function () {
       .then(function (response) {
         console.log(response,'response 24');
         authToken1 = response.body.access_token;
-      }).catch(err=> {
-        console.log(err,'27 line');
       })
   });
   it('post api reservation', async function ({ supertest }) {
@@ -49,8 +47,8 @@ describe('api Authu Token1', function () {
                         "amountBeforeTax": 299,
                         "baseAmount": 299
                       },
-                      "start": "2024-10-25",
-                      "end": "2024-10-25"
+                      "start": "2024-08-02",
+                      "end": "2024-08-02"
                     }
                   },
                   "stayProfiles": [
@@ -84,23 +82,23 @@ describe('api Authu Token1', function () {
                   "numberOfUnits": 1,
                   "pseudoRoom": false,
                   "roomTypeCharged": "KNGN",
-                  "start": "2024-10-25",
-                  "end": "2024-10-25"
+                  "start": "2024-08-02",
+                  "end": "2024-08-02"
                 },
                 "guestCounts": {
                   "adults": 1,
                   "children": 0
                 },
                 "expectedTimes": {
-                  "reservationExpectedArrivalTime": "2024-10-25",
-                  "reservationExpectedDepartureTime": "2024-10-26"
+                  "reservationExpectedArrivalTime": "2024-08-02",
+                  "reservationExpectedDepartureTime": "2024-08-03"
                 },
                 "guarantee": {
                   "guaranteeCode": "INN",
                   "onHold": false
                 },
-                "arrivalDate": "2024-10-25",
-                "departureDate": "2024-10-26"
+                "arrivalDate": "2024-08-02",
+                "departureDate": "2024-08-03"
               },
               "reservationGuests": {
                 "profileInfo": {
@@ -281,51 +279,6 @@ describe('api Authu Token1', function () {
   });
 });
 
-// describe('api Authu Token2', function () {
-//   it('GET api test 2', async function({supertest}) {
-//     await supertest
-//       .request("https://int-api.ihg.com")
-//       .post("/external/authentication/v1/token")
-//    //   .set('Content-Type', 'application/x-www-form-urlencoded')
-//         .set('X-IHG-M2M', '>24Y#-#`R-S8W,2MS=&%G:6YG+6%P:2YI:&<N8V]M')
-//         .set('User-Agent', 'Oracle PMS to APIGee')
-//         .set('X-IHG-AUTO', '>24Y#-#`R-S8W,2MS=&%G:6YG+6%P:2YI:&<N8V]M')
-//         .set('X-IHG-API-KEY', 'Af9n4H1gUGdEAOGK6PcPk3FWX2PhyWFo')
-//      // .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
-//       .set('Authorization', 'Basic QWY5bjRIMWdVR2RFQU9HSzZQY1BrM0ZXWDJQaHlXRm86ODRjd2VVMEtBM2IycFl4WA==')
-//     .send({
-//         username: 'IHGSIT_COGNIZANT',
-//    //     password: 'UoHkm74M58C1#f16F3wys3U4',
-//    //     grant_type: 'password'
-//       })
-//       .expect(200)
-//       .expect('Content-Type', /json/)
-//       .then(function(response){
-//         authToken2=response._body.access_token;
-//       });
-//   });
-//   it('Get api test 3', async function ({ supertest }) {    
-//     await supertest
-//       .request("https://int-api.ihg.com")
-//       .get("/reservations/v3/hotels/81262375")
-//       .query({
-//         lastName: 'SR'
-//       })
-//       .set('Content-Length', '0')
-//       .set('X-IHG-M2M', '>24Y#-#`R-S8W,2MS=&%G:6YG+6%P:2YI:&<N8V]M')
-//       .set('User-Agent', 'Oracle PMS to APIGee')
-//       .set('X-IHG-AUTO', '>24Y#-#`R-S8W,2MS=&%G:6YG+6%P:2YI:&<N8V]M')
-//       .set('X-IHG-API-KEY', 'Af9n4H1gUGdEAOGK6PcPk3FWX2PhyWFo')
-//       .set('bypass-routing', 'N')
-//       .set('Authorization', 'Basic QWY5bjRIMWdVR2RFQU9HSzZQY1BrM0ZXWDJQaHlXRm86ODRjd2VVMEtBM2IycFl4WA==')
-//       .expect(200)
-//       .expect('Content-Type', /json/)
-//       .then(function (response) {
-//         console.log(response.text);
-//         console.log("Get API test after login run successfully");
-//       });
-//   });
-// });
 
 
  

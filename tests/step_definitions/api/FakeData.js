@@ -26,12 +26,12 @@ for (let i = 0; i < numberOfRecords; i++) {
     // ratePlanCod: faker.random.alpha({ count: 5, upcase: true }),
     // marketCod: faker.random.alpha({ count: 1, upcase: true }),
     // sourceCod: faker.random.alpha({ count: 2, upcase: true }),
-    numberOfRooms: faker.datatype.number({ min: 1, max: 2 }),
+   // numberOfRooms: faker.datatype.number({ min: 1, max: 2 }),
     // roomTypeChar: faker.random.alpha({ count: 4, upcase: true }),
-    adults: faker.datatype.number({ min: 1, max: 2 }),
-    children: faker.datatype.number({ min: 0, max: 2 }),
-    limit: faker.datatype.number({ min: 1, max: 3}),
-    roomStayQuantity: faker.datatype.number({ min: 1, max: 2}),
+    // adults: faker.datatype.number({ min: 1, max: 2 }),
+    // children: faker.datatype.number({ min: 0, max: 2 }),
+    // limit: faker.datatype.number({ min: 1, max: 3}),
+    // roomStayQuantity: faker.datatype.number({ min: 1, max: 2}),
     // guaranteeTyp: faker.random.alpha({ count: 3, upcase: true }),
   });
 }

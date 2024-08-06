@@ -3,7 +3,7 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 
 // Define the number of records you want to generate
-const numberOfRecords = 10;
+const numberOfRecords = 3;
 
 const fakeData = [];
 
@@ -19,11 +19,11 @@ for (let i = 0; i < numberOfRecords; i++) {
     endDate: formattedArrivalDate,
     arrivalDate: formattedArrivalDate,
     depatureD: formattedDepartureDate,
-    numberOfRooms: faker.datatype.number({ min: 1, max: 2 }),
-    adults: faker.datatype.number({ min: 1, max: 2 }),
-    children: faker.datatype.number({ min: 0, max: 2 }),
-    limit: faker.datatype.number({ min: 1, max: 3 }),
-    roomStayQuantity: faker.datatype.number({ min: 1, max: 2 }),
+    // numberOfRooms: faker.datatype.number({ min: 1, max: 2 }),
+    // adults: faker.datatype.number({ min: 1, max: 2 }),
+    // children: faker.datatype.number({ min: 0, max: 2 }),
+    // limit: faker.datatype.number({ min: 1, max: 3 }),
+    // roomStayQuantity: faker.datatype.number({ min: 1, max: 2 }),
   });
 }
 
