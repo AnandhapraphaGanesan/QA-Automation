@@ -24,7 +24,7 @@ describe('api Authu Token', function () {
 it('Put api test after login', async function({supertest}) {
   await supertest
       .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
-      .put("/rsv/v1/hotels/GRVZA/reservations/88793")
+      .put("/rsv/v1/hotels/GRVZA/reservations/93916")
       .set('Content-Type', 'application/json')
       .set('x-hotelid', 'GRVZA')
       .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
@@ -37,7 +37,7 @@ it('Put api test after login', async function({supertest}) {
                     "reservationIdList": [
                         {
                             "type": "Reservation",
-                            "id": campaignId
+                            "id": 93916
                         }
                     ],
                     "roomStay": {
@@ -47,13 +47,13 @@ it('Put api test after login', async function({supertest}) {
                                     "rate": [
                                         {
                                             "base": {
-                                                "amountBeforeTax": "199",
+                                                "amountBeforeTax": "299",
                                                 "currencyCode": "USD"
                                             },
                                             "discount": {},
                                             "requiredPoints": {},
-                                            "start": "2024-06-17",
-                                            "end": "2024-06-17"
+                                            "start": "2024-08-27",
+                                            "end": "2024-08-27"
                                         }
                                     ]
                                 },
@@ -90,8 +90,8 @@ it('Put api test after login', async function({supertest}) {
                                 "roomTypeCharged": "TDBN",
                                 "fixedRate": true,
                                 "discountAllowed": false,
-                                "start": "2024-06-17",
-                                "end": "2024-06-17"
+                                "start": "2024-08-27",
+                                "end": "2024-08-27"
                             }
                         ],
                         "guestCounts": {
@@ -99,14 +99,14 @@ it('Put api test after login', async function({supertest}) {
                             "children": 0
                         },
                         "expectedTimes": {
-                            "reservationExpectedArrivalTime": "2024-06-17",
-                            "reservationExpectedDepartureTime": "2024-06-18"
+                            "reservationExpectedArrivalTime": "2024-08-27",
+                            "reservationExpectedDepartureTime": "2024-08-28"
                         },
                         "guarantee": {
                             "guaranteeCode": "INN"
                         },
-                        "arrivalDate": "2024-06-17",
-                        "departureDate": "2024-06-18"
+                        "arrivalDate": "2024-08-27",
+                        "departureDate": "2024-08-28"
                     },
                     "reservationGuests": [
                         {

@@ -23,7 +23,7 @@ describe('api Authu Token', function () {
 it('Put api test after login', async function({supertest}) {
     await supertest
         .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
-        .put("/rsv/v1/hotels/GRVZA/reservations/86468")
+        .put("/rsv/v1/hotels/GRVZA/reservations/93916")
         .set('Content-Type', 'application/json')
         .set('x-hotelid', 'GRVZA')
         .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
@@ -39,7 +39,7 @@ it('Put api test after login', async function({supertest}) {
             "reservationIdList": {
               "type": "Reservation",
               "idContext": "OPERA",
-              "id": 86468
+              "id": 93916
             },
             "roomStay": {
               "guarantee": {
