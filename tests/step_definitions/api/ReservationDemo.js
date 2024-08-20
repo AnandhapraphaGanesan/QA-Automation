@@ -137,7 +137,7 @@ describe('Api Auth Token1', function () {
         .expect(200)
         .expect('Content-Type', /json/)
         .then(function (response) {
-          console.log(response)
+          // console.log(response)
         });
     })
 
@@ -257,11 +257,11 @@ describe('Api Auth Token1', function () {
         .expect(200)
         .expect('Content-Type', /json/)
         .then(function (response) {
-          console.log(response)
+          // console.log(response)
         });
     });
 
-    it('Post Create Reservation', async function ({ supertest }) {
+    it('POST Create Reservation', async function ({ supertest }) {
       const formattedStartDate = formatDateToString(row.startDate); // Format startDate to string
       const formattedEndDate = formatDateToString(row.endDate); // Format endDate to string
       formattedArrivalDate = formatDateToString(row.arrivalDate); // Format arrivalDate to string
@@ -818,12 +818,12 @@ describe('Api Auth Token1', function () {
           .expect(200)
           .expect("Content-Type", /json/)
           .then(function (response) {
-            console.log(response)
+            // console.log(response)
           });
       });
 
       data.forEach(row => {
-        it('GET Reservation OHIP', async function ({ supertest }) {
+        it('GET Reservation OHIP1', async function ({ supertest }) {
           await supertest
             .request(row.request)
             .get(row.Getendpath + reservationId)
@@ -835,19 +835,10 @@ describe('Api Auth Token1', function () {
             .expect(200)
             .expect('Content-Type', /json/)
             .then(function (response) {
-              const responseBody = JSON.parse(response.text);
-              const reservation = responseBody.reservations.reservation[0];
-
-              const confirmationIdEntry = reservation.reservationIdList.find(idEntry => idEntry.type === 'Confirmation');
-              confirmationId = confirmationIdEntry ? confirmationIdEntry.id : 'Not found';
-
-              const externalReferenceIdEntry = reservation.externalReferences.find(ref => ref.idContext === 'CRS_IHGSIT');
-              externalReferenceId = externalReferenceIdEntry ? externalReferenceIdEntry.id : 'Not found';
-
-              console.log("Status : Reservation created Successfully in OHIP");
-              console.log("Reservation ID :", reservationId);
-              console.log('Confirmation ID:', confirmationId);
-              console.log('External Reference ID:', externalReferenceId);
+              const responseData = response.body;
+              // Extracting roomType from currentRoomInfo
+              const roomTypeFromCurrentRoomInfo = responseData?.reservations?.reservation?.[0]?.roomStay?.currentRoomInfo?.roomType;
+              console.log('Room Type :', roomTypeFromCurrentRoomInfo);
             })
             .catch(function (error) {
               console.error('Error in Get api test after login:', error);
@@ -879,7 +870,7 @@ describe('Api Auth Token1', function () {
               });
           });
 
-          it('GET Reservation GRS', async function ({ supertest }) {
+          it('GET Reservation GRS2', async function ({ supertest }) {
             await supertest
               .request(row.request1)
               .get(row.Getendpath1 + externalReferenceId)
@@ -896,22 +887,17 @@ describe('Api Auth Token1', function () {
               .expect(200)
               .expect('Content-Type', /json/)
               .then(function (response) {
-                const responseBody = JSON.parse(response.text);
-                const reservation = responseBody.hotelReservation;
+                // console.log(response)
+                const responseData = response.body;
+                // Extracting the first inventoryTypeCode from productDefinitions array
+                const productDefinitions = responseData?.hotelReservation?.productDefinitions;
 
-                const ihgConfirmationNumberEntry = reservation.reservationIds.confirmationNumbers.find(entry => entry.ihgConfirmationNumber);
-                ihgConfirmationNumber = ihgConfirmationNumberEntry ? ihgConfirmationNumberEntry.ihgConfirmationNumber : 'Not found';
-
-                const externalConfirmationNumberEntry = reservation.reservationIds.confirmationNumbers.find(entry => entry.externalConfirmationNumber && entry.externalConfirmationNumber.number);
-                externalConfirmationNumber = externalConfirmationNumberEntry ? externalConfirmationNumberEntry.externalConfirmationNumber.number : 'Not found';
-
-                const pmsConfirmationNumberEntry = reservation.reservationIds.confirmationNumbers.find(entry => entry.pmsConfirmationNumber);
-                pmsConfirmationNumber = pmsConfirmationNumberEntry ? pmsConfirmationNumberEntry.pmsConfirmationNumber : 'Not found';
-
-                console.log("Status: Reservation created Successfully in GRS");
-                console.log("IHG Confirmation Number:", ihgConfirmationNumber);
-                console.log("External Confirmation Number:", externalConfirmationNumber);
-                console.log("PMS Confirmation Number:", pmsConfirmationNumber);
+                if (productDefinitions && productDefinitions.length > 0) {
+                  const firstInventoryTypeCode = productDefinitions[0].inventoryTypeCode;
+                  console.log('First Inventory Type Code:', firstInventoryTypeCode);
+                } else {
+                  console.log('No product definitions found.');
+                }
               })
               .catch(function (error) {
                 console.error('Error in Get api test 3:', error);
@@ -919,7 +905,7 @@ describe('Api Auth Token1', function () {
           });
         });
 
-        it('Post Cancel Reservation', async function ({ supertest }) {
+        it('POST Cancel Reservation', async function ({ supertest }) {
           await supertest
             .request(row.request)
             .post(row.Postendpath1)
@@ -974,29 +960,91 @@ describe('Api Auth Token1', function () {
             .expect(201)
             .expect('Content-Type', /json/)
             .then(function (response) {
-              console.log(response)
+              // console.log(response)
               console.log("Status: Reservation cancelled Successfully");
             });
         });
       });
-      // Store result
-      testResults.push({
-        Status: 'Reservation created successfully ',
-        ReservationID: reservationId,
-        ConfirmationID: confirmationId,
-        ExternalReferenceId: externalReferenceId,
-        IHGConfirmationNumber: ihgConfirmationNumber,
-        ExternalConfirmationNumber: externalConfirmationNumber,
-        PMSConfirmationNumber: pmsConfirmationNumber,
-        ArrivalDate: formattedArrivalDate,
-        DepartureDate: formattedDepatureDate,
-        DateTime: getCurrentDateTime(),
+
+      data.forEach(row => {
+        it('GET Reservation OHIP2', async function ({ supertest }) {
+          await supertest
+            .request(row.request)
+            .get(row.Getendpath + reservationId)
+            .set('Content-Type', row['Content-Type1'])
+            .set('x-hotelid', row.hotelId)
+            .set('x-app-key', row['x-app-key'])
+            .set('bypass-routing', row['bypass-routing'])
+            .set('Authorization', 'Bearer ' + authToken1)
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .then(function (response) {
+              //console.log(response)
+              const responseBody = response.body;
+              const cancellationId = responseBody.reservations.reservation[0].cancellation.cancellationNo.id;
+              const reservationStatus = responseBody.reservations.reservation[0].reservationStatus;
+              console.log("Cancellation ID:", cancellationId);
+              console.log("Reservation Status:", reservationStatus);
+            })
+            .catch(function (error) {
+              console.error('Error in Get api test after login:', error);
+            });
+        });
       });
-      after(function () {
-        writeResultsToExcel(filePath, resultsSheetName, testResults);
+
+      it('GET Reservation GRS3', async function ({ supertest }) {
+        await supertest
+          .request(row.request1)
+          .get(row.Getendpath1 + externalReferenceId)
+          .query({
+            lastName: row.lastName
+          })
+          .set('Content-Length', '0')
+          .set('X-IHG-M2M', row['X-IHG-M2M'])
+          .set('User-Agent', row['User-Agent'])
+          .set('X-IHG-AUTO', row['X-IHG-AUTO'])
+          .set('X-IHG-API-KEY', row['X-IHG-API-KEY'])
+          .set('bypass-routing', row['bypass-routing'])
+          .set('Authorization', row.Authorization1)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .then(function (response) {
+          //  console.log(response)
+          const data = response.body;
+      
+          const reservationStatus = data.hotelReservation?.reservationStatus;
+          const cancellationNumber = data.hotelReservation?.reservationIds?.cancellationNumber;
+          
+          console.log('Reservation Status:', reservationStatus);
+          console.log('Cancellation Number:', cancellationNumber);
+           
+          })
+          .catch(function (error) {
+            console.error('Error in Get api test 3:', error);
+          });
+
+        // Store result
+        testResults.push({
+          Status: 'Reservation created successfully ',
+          ReservationID: reservationId,
+          ConfirmationID: confirmationId,
+          ExternalReferenceId: externalReferenceId,
+          IHGConfirmationNumber: ihgConfirmationNumber,
+          ExternalConfirmationNumber: externalConfirmationNumber,
+          PMSConfirmationNumber: pmsConfirmationNumber,
+          ArrivalDate: formattedArrivalDate,
+          DepartureDate: formattedDepatureDate,
+          DateTime: getCurrentDateTime(),
+        });
       });
     });
 
-  })
+
+    after(function () {
+      writeResultsToExcel(filePath, resultsSheetName, testResults);
+    });
+  });
+
 })
+
 

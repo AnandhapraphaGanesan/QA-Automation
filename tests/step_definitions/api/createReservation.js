@@ -17,8 +17,10 @@ describe('api Authu Token', function () {
       .expect('Content-Type', /json/)
       .then(function (response) {
         authToken = response._body.access_token;
+        console.log(response)
       });
   });
+})
 
   it('post api test after login', async function ({ supertest }) {
     await supertest
@@ -236,7 +238,7 @@ describe('api Authu Token', function () {
         console.log(response)
       });
   });
-})
+
 it('Get api test after login', async function ({ supertest }) {
   await supertest
     .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
