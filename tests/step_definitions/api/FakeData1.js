@@ -3,7 +3,7 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 
 // Define the number of records you want to generate
-const numberOfRecords = 3;
+const numberOfRecords = 10;
 
 const fakeData = [];
 
