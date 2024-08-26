@@ -432,7 +432,7 @@ describe('API Auth Token1', function () {
                 .put(reservation.Getendpath + reservationId)
                 .set("Content-Type", reservation['Content-Type1'])
                 .set("x-hotelid", reservation.hotelId)
-                .set("x-app-key", reservation['x-app-key1'])
+                .set("x-app-key", reservation['x-app-key'])
                 .set("bypass-routing", reservation['bypass-routing'])
                 .set("Authorization", "Bearer " + authToken1)
                 .send({

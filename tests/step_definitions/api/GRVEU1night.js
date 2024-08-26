@@ -16,7 +16,7 @@ describe("api Authu Token", function () {
       .then(function(response){
         authToken1=response._body.access_token;
       });
-  });
+  });  
 
     it("post api test after login", async function ({ supertest }) {
         await supertest

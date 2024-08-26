@@ -19,7 +19,10 @@ for (let i = 0; i < numberOfRecords; i++) {
         endDate: formattedArrivalDate,
         arrivalDate: formattedArrivalDate,
         departureDate: formattedDepartureDate,
-    });
+        numberOfRooms: faker.datatype.number({ min: 1, max: 2 }),
+        adults: faker.datatype.number({ min: 1, max: 2 }),
+        children: faker.datatype.number({ min: 0, max: 2 }),
+        });
 }
 console.log(fakeData);
 

@@ -64,7 +64,7 @@ function getCurrentDateTime() {
 }
 
 // Correct file path and sheet name
-const filePath = "C:/Users/User/Desktop/GRVXX.xlsx";
+const filePath = "C:/Users/User/Desktop/GRVZZ.xlsx";
 const sheetName = "CreateReservation"; // Ensure this matches your sheet name
 const resultsSheetName = "Result";
 
@@ -73,12 +73,12 @@ const data = readExcel(filePath, sheetName);
 const testResults = []; // Array to store test results
 
 data.forEach((row) => {
-  let authToken1,
+  let authToken1, 
     authToken2,
     reservationId,
     confirmationId,
     externalReferenceId;
-  let ihgConfirmationNumber, externalConfirmationNumber, pmsConfirmationNumber;
+  let ihgConfirmationNumber, externalConfirmationNumber, pmsConfirmationNumber; 
   let formattedArrivalDate, formattedDepatureDate;
 
   describe("api Authu Token", function () {
