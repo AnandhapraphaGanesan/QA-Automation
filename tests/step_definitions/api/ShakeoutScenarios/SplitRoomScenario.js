@@ -7,7 +7,7 @@ function readExcel(filePath, sheetName) {
     return xlsx.utils.sheet_to_json(worksheet);
 }
 
-// Function to write results to Excel - output sheet
+// Function to write results to Excel - output sheet~
 function writeResultsToExcel(filePath, sheetName, results) {
     try{
     const workbook = xlsx.readFile(filePath); //Reading the Excel File
@@ -639,7 +639,7 @@ describe('Api Auth Token1', function () {
                     .expect(200)
                     .expect("Content-Type", /json/)
                     .then(function (response) {
-                        // console.log(response)
+                         console.log(response)
                     });
             });
 

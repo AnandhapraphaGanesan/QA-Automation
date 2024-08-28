@@ -785,7 +785,7 @@ describe('Api Auth Token1', function () {
                                     "includeRouting": true,
                                     "includeComments": false,
                                     "includePackages": true,
-                                    "includeItemInventory": true,
+                                    "includeItemInventory": true, 
                                     "includeCreditCardPayments": true,
                                     "includeNonCreditCardPayments": true,
                                     "includeCompRouting": false
