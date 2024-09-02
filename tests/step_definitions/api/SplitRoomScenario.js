@@ -632,7 +632,7 @@ describe('Api Auth Token1', function () {
                                 "fetchNewReservationIDs": "false"
                             },
                             "lockHandle": "0",
-                            "splitAll": "false"
+                            "splitAll": "true"
 
                         }
                     )

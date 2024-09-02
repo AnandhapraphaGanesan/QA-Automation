@@ -110,6 +110,9 @@ data.forEach((row) => {
       formattedArrivalDate = formatDateToString(row.arrivalDate);
       formattedDepatureDate = formatDateToString(row.depatureDate);
 
+      console.log('Request:', row.request); // Debugging line
+      console.log('PostendPath:', row.Postendpath); // Debugging line
+
       await supertest
         .request(row.request)
         .post(row.Postendpath)

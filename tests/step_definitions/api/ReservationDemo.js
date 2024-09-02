@@ -63,7 +63,7 @@ function getCurrentDateTime() {
 }
 
 // Correct file path and sheet name
-const filePath = 'C:/Users/User/Desktop/Reservation.xlsx';
+const filePath = 'C:/Users/User/Desktop/GRVXX.xlsx';
 const sheetName = 'CreateReservation'; // Ensure this matches your sheet name
 const resultsSheetName = 'Result';
 
