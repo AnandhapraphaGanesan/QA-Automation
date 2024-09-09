@@ -8,7 +8,7 @@ describe('api Authu Token', function () {
         .set('Authorization', 'Basic Og==')
         .send({
           username: 'IHGSIT_COGNIZANT',
-          password: 'UoHkm74M58C1#f16F3wys3U4',
+          password: 'BRknSHwFNvLyDpa4h7e3jcK8b!',
           grant_type: 'password'
         })
         .expect(200)

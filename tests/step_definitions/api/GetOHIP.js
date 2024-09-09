@@ -24,7 +24,7 @@ describe('api Authu Token', function () {
   it('Get api test after login', async function ({ supertest }) {
       await supertest
         .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
-        .get("/rsv/v1/hotels/GRVZZ/reservations/93503")
+        .get("/rsv/v1/hotels/GRVZZ/reservations/")
         .set('Content-Type', 'application/json')
         .set('x-hotelid', 'GRVZZ')
         .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
