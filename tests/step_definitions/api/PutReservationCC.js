@@ -23,9 +23,9 @@ describe('api Authu Token', function () {
 it('Put api test after login', async function({supertest}) {
     await supertest
         .request("https://ihgcu2ua.hospitality-api.us-ashburn-1.ocs.oc-test.com")
-        .put("/rsv/v1/hotels/GRVZA/reservations/86468")
+        .put("/rsv/v1/hotels/GRVXX/reservations/97898")
         .set('Content-Type', 'application/json')
-        .set('x-hotelid', 'GRVZA')
+        .set('x-hotelid', 'GRVXX')
         .set('x-app-key', '69594b78-9894-4914-a894-860ca6d056db')
         .set('bypass-routing', 'N')
         .set('Authorization', 'Bearer '+authToken)
@@ -39,7 +39,7 @@ it('Put api test after login', async function({supertest}) {
             "reservationIdList": {
               "type": "Reservation",
               "idContext": "OPERA",
-              "id": 86468
+              "id": 97898
             },
             "roomStay": {
               "guarantee": {
@@ -57,7 +57,7 @@ it('Put api test after login', async function({supertest}) {
                         "cardType": "AX",
                         "cardNumber": "373344556677889",
                         "cardNumberMasked": "XXXXXXXXXXXX0149",
-                        "expirationDate": "2029-11-30",
+                        "expirationDate": "2029-08-24",
                         "storeToCreditCardWallet": "false"
                     },
                     "emailFolioInfo": {
@@ -77,7 +77,7 @@ it('Put api test after login', async function({supertest}) {
                 "reverseCheckInAllowed": "false",
                 "reverseAdvanceCheckInAllowed": "false"
             },
-            "hotelId": "GRVZA",
+            "hotelId": "GRVXX",
             "reservationStatus": "Reserved",
             "customReference": "",
             "displayColor": "",

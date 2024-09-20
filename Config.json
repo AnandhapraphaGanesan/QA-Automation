@@ -1,0 +1,6 @@
+{
+    "filepath": {
+      "jsonfilePath" : "./tests/step_definitions/api/ShakeoutScenarios-ReservationFlow/Reservation_flowtd.json" ,
+      "xlsfilepath" : "./tests/step_definitions/api/ShakeoutScenarios-ReservationFlow/reservflows.xlsx"     
+    }
+}

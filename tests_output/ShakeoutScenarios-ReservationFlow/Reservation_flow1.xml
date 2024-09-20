@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="0">
+
+  <testsuite name="ShakeoutScenarios-ReservationFlow.Reservation_flow1"
+    errors="1" failures="0" hostname="" id="" package="ShakeoutScenarios-ReservationFlow" skipped="11"
+    tests="0" time="0.001000" timestamp="">
+  
+
+  
+    <system-err>
+       An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 125
+Current browser version is 128.0.6613.138 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+  Verify if ChromeDriver is configured correctly; using:
+  {
+     start_process: true,
+     server_path: &#39;C:\\Users\\User\\Documents\\QA-Automation\\node_modules\\chromedriver\\lib\\chromedriver\\chromedriver.exe&#39;,
+     port: 9515,
+     host: &#39;localhost&#39;,
+     ssl: false,
+     default_path_prefix: &#39;&#39;,
+     proxy: undefined,
+     cli_args: {}
+  }
+
+ 
+  Set webdriver.log_path in your Nightwatch config to retrieve more logs from ChromeDriver.
+    </system-err>
+  
+
+    
+    <error message="An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 125
+Current browser version is 128.0.6613.138 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe"><![CDATA[
+      SessionNotCreatedError: An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 125
+Current browser version is 128.0.6613.138 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+    at Object.throwDecodedError (C:\Users\User\Documents\QA-Automation\node_modules\selenium-webdriver\lib\error.js:521:15)
+    at parseHttpResponse (C:\Users\User\Documents\QA-Automation\node_modules\selenium-webdriver\lib\http.js:514:13)
+    at Executor.execute (C:\Users\User\Documents\QA-Automation\node_modules\selenium-webdriver\lib\http.js:446:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      ]]></error>  
+
+  
+    
+    <testcase
+      name="GET Check Availability" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="PUT Check Validation" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="POST Create Reservation" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation OHIP" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation GRS" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="PUT Update Reservation" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation OHIP" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation GRS" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="POST Cancel Reservation" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation cancel OHIP" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="GET Reservation cancel GRS" classname="ShakeoutScenarios-ReservationFlow.Reservation_flow1">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

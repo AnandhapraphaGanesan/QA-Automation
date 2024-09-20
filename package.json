@@ -30,7 +30,8 @@
     "e2e-test-androidapp": "nightwatch --env app.android.real --format --reporter=html",
     "e2e-test-iosapp": "nightwatch --env app.ios.real --format --reporter=html",
     "e2e-test-emulatorapp": "nightwatch --env app.android.emulator --format --reporter=html",
-    "e2e-test-simulatorapp": "nightwatch --env app.ios.simulator --format --reporter=html"
+    "e2e-test-simulatorapp": "nightwatch --env app.ios.simulator --format --reporter=html",
+    "test:priority": "nightwatch --test tests/step_definitions/api/ShakeoutScenarios-ReservationFlow/Reservation_flow1.js && nightwatch --test tests/step_definitions/api/ShakeoutScenarios-ReservationFlow/Reservation_flow2.js"
   },
   "keywords": [],
   "author": "",
